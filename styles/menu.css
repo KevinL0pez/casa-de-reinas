@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+* {
+    font-family: 'Roboto';
+}
+
+/* Estilos para el menú principal */
+nav ul {
+    list-style: none;
+    padding: 0;
+    background-color: #333;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Estilos para el submenú */
+.submenu ul {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    padding: 0;
+}
+
+.submenu:hover ul {
+    display: block;
+}
+
+.submenu li {
+    display: block;
+}
+
+.submenu a {
+    display: block;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.submenu:hover a {
+    background-color: #555;
+}
+
+/* Estilos para el submenú en posición relativa */
+.submenu {
+    position: relative;
+}
