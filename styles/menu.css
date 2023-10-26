@@ -1,55 +1,78 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 
 * {
-    font-family: 'Roboto';
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
 }
 
 /* Estilos para el menú principal */
-nav ul {
-    list-style: none;
-    padding: 0;
-    background-color: #333;
+.nav {
+  display: flex;
+  height: 30px;
+  background-color: rgb(44, 44, 44);
+  justify-content: space-between;
+  padding: 1.5rem;
+  align-items: center;
 }
 
-nav li {
-    display: inline-block;
-    margin-right: 20px;
+.nav-logo {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
-nav a {
-    color: #fff;
-    text-decoration: none;
+.logo-text {
+  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+  font-weight: 200;
 }
 
-/* Estilos para el submenú */
-.submenu ul {
+.nav-navigation {
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  transition: all 0.3s ease-in-out 0.05s;
+}
+
+.nav-button:hover {
+  transform: translateY(-0.5rem) scale(1.1);
+  background-color: #555; /* Cambia esto al color de fondo deseado */
+  transition-duration: 0.5s;
+}
+
+/* Estilo del menú desplegable */
+.dropdown-content {
     display: none;
     position: absolute;
-    background-color: #333;
-    padding: 0;
+    padding: 1rem;
+    background-color: rgb(44, 44, 44);
+    min-width: 160px;
+    z-index: 1;
 }
 
-.submenu:hover ul {
-    display: block;
-}
-
-.submenu li {
-    display: block;
-}
-
-.submenu a {
-    display: block;
-    color: #fff;
+/* Añade estilos a los elementos de la lista desplegable si es necesario */
+.dropdown-content button {
+    width: 100%;
     padding: 10px;
-    text-decoration: none;
+    text-align: left;
+    color: rgb(255, 255, 255);
+    border: none;
+    background-color: transparent;
 }
 
-/* Estilos adicionales para mejorar la apariencia */
-.submenu:hover a {
-    background-color: #555;
-}
-
-/* Estilos para el submenú en posición relativa */
-.submenu {
-    position: relative;
+/* Estilo para mostrar el menú desplegable al pasar el mouse sobre el botón "Productos" */
+.dropdown:hover .dropdown-content {
+    display: block;
 }
