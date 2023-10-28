@@ -6,6 +6,7 @@ app.use(bodyParser.json()); // Para datos JSON
 
 import {
   buildControllerSaveProduct,
+  buildControllerGetProducts,
   buildControllerProducts
 } from "./controllers";
 
@@ -50,10 +51,31 @@ app.get('/obtenerproductos', async (req, res) => {
       return;
     }
 
-    const productos = await buildControllerProducts(categoria);
+    const productos = await buildControllerGetProducts(categoria);
 
     if (productos.length === 0) {
       res.status(404).send(`No se encontraron productos en la categoría: ${categoria}`);
+    } else {
+      // Configura un tipo de contenido genérico para datos binarios
+      res.contentType('application/octet-stream');
+      
+      // Envía los datos binarios de la imagen como respuesta
+      res.status(200).json(productos);
+    }
+  } catch (error) {
+    console.error("Ocurrió un error en el servidor:", error);
+    res.status(500).send("Error al obtener los productos. Por favor, inténtalo de nuevo más tarde.");
+  }
+});
+
+// Servicio GET para traer imagenes por una categoría
+app.get('/productos', async (req, res) => {
+  try {
+
+    const productos = await buildControllerProducts();
+
+    if (productos.length === 0) {
+      res.status(404).send(`No se encontraron productos registrados.`);
     } else {
       // Configura un tipo de contenido genérico para datos binarios
       res.contentType('application/octet-stream');

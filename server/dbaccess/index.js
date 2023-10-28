@@ -77,5 +77,34 @@ export async function dbGetProducts(objectConsult, categoriaId) {
   });
 }
 
-const dataAccess = buildDataAccess({ dbSaveProducts, dbGetProducts });
+export async function dbGetAllProducts(objectConsult) {
+  return new Promise((resolve, reject) => {
+    const connection = mysql.createConnection(dbConfig); // Crea una nueva conexión
+
+    connection.connect((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      console.log('Conexión exitosa a la base de datos MySQL');
+
+      connection.query(objectConsult, (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          connection.end((err) => {
+            if (err) {
+              reject(err);
+            } else {
+              console.log('Conexión cerrada exitosamente.');
+              resolve(result);
+            }
+          });
+        }
+      });
+    });
+  });
+}
+
+const dataAccess = buildDataAccess({ dbSaveProducts, dbGetProducts, dbGetAllProducts });
 export default dataAccess;

@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+* {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #87848491;
+  border-radius: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+:root {
+  /* Paleta de colores */
+  --bg-primary: #131417;
+  --bg-secondary: #1e1f26;
+  --color-primary: #2c303a;
+  --black: #000000;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+}
+
+.menu {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  position: fixed;
+  z-index: 1;
+}
+
+footer {
+  height: 90px;
+  background-color: rgb(207, 12, 116);
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+footer > p {
+  color: aliceblue;
+  font-size: 18px;
+}
+
+header {
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+}
