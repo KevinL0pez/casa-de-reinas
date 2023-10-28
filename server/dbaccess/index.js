@@ -1,6 +1,7 @@
 import mysql from 'mysql';
-import buildDataAccess from './receipts/receipts-db';
+import buildDataAccess from './dataAccess';
 import appsettings from '../data/appsettings.json';
+const fs = require('fs');
 
 const host = appsettings.db_config.host;
 const user = appsettings.db_config.user;
@@ -17,7 +18,9 @@ const dbConfig = {
 
 const connection = mysql.createConnection(dbConfig);
 
-export async function ApiCall(objectConsult) {
+export async function dbSaveProducts(objectConsult, queryParams) {
+  const { nombre, rutaArchivo, categoria, descripcion, precio } = queryParams;
+  const contenidoBinario = fs.readFileSync(rutaArchivo);
   return new Promise((resolve, reject) => {
     connection.connect((err) => {
       if (err) {
@@ -26,14 +29,12 @@ export async function ApiCall(objectConsult) {
       }
       console.log('Conexión exitosa a la base de datos MySQL');
       
-      // Aquí puedes realizar la consulta recibida como parámetro
-      connection.query(objectConsult, (error, result) => {
+      // Se realiza la consulta
+      connection.query(objectConsult, [nombre, contenidoBinario, categoria, descripcion, precio], (error, result) => {
         if (error) {
           reject(error);
         } else {
-          // Trabaja con el resultado de la consulta
-          console.log('Resultado de la consulta:', result);
-          // Cuando hayas terminado de usar la conexión, ciérrala
+          // Cerrar conexión
           connection.end((err) => {
             if (err) {
               reject(err);
@@ -48,5 +49,5 @@ export async function ApiCall(objectConsult) {
   });
 }
 
-const dataAccess = buildDataAccess({ ApiCall });
+const dataAccess = buildDataAccess({ dbSaveProducts });
 export default dataAccess;

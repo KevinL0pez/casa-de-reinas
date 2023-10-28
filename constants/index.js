@@ -1,0 +1,9 @@
+export const TIPO_CATEGORIA = {
+    "ESMALTE_LATIN_GRANDE": 1,
+    "LAMPARA_UV": 2,
+    "DRI_INALAMBRICO": 3,
+    "STICKERS": 4,
+    "ACEITE_DE_CUTICULA": 5,
+    "CORTA_CUTICULA": 6,
+    "LOGO": 7
+}
