@@ -90,5 +90,5 @@ app.get('/productos', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Servidor Express escuchando en el puerto ${port}`);
+  console.log(`Servidor ejecutandose en el puerto ${port}`);
 });

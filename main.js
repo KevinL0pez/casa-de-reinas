@@ -44,5 +44,5 @@ app.get('*', (req, res) => {
 
 // Iniciar el servidor en el puerto 5500
 app.listen(5500, () => {
-    console.log('Servidor en ejecución en el puerto 5500');
+    console.log(`Servidor ejecutandose en http://localhost:5500/`);
 });

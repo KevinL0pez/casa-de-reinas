@@ -27,7 +27,12 @@ buttons.forEach((button, index) => {
             try {
                 console.log(buttonPages[index]);
                 // Realiza una solicitud Fetch al servidor en el puerto 5500
-                 await fetch(`http://localhost:5500/${buttonPages[index]}`);
+                const response = await fetch(`http://localhost:5500/${buttonPages[index]}`);
+                if (response.ok) {
+                    window.location.href = response.url;
+                } else {
+                    console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+                }
             } catch (error) {
                 console.error("Error en la solicitud:", error);
             }
