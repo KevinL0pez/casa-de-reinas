@@ -1,24 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Servicio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-    <link rel="stylesheet" href="styles/services.css" >
-    <link rel="stylesheet" href="styles/index.css">
-</head>
-<body>
-    <!-- TODO Crear el menú de navegación -> -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/services.css" />
+    <link rel="stylesheet" href="styles/index.css" />
+  </head>
+  <body>
+    <!-- Menú de navegación -> -->
     <object class="menu" data="components/menu.html"></object>
 
-    <!-- TODO Crear el Header de la página -->
+    <!-- Header de la página -->
     <header>
-      <h1>Services</h1>
+      <div class="menu-fondo">
+        <img src="assets/fondo-inicio.jpg" alt="fondo-inicio" />
+        <div class="contenido-header">
+          <h1>SERVICIOS</h1>
+        </div>
+      </div>
     </header>
 
-    <!-- TODO Crear el Footer de la página -->
+    <section>
+      <div class="subtitulo">
+        <h2>Listado de servicios</h2>
+      </div>
+
+      <div class="contenedor-linea">
+        <div class="linea"></div>
+      </div>
+
+      <div class="contenedor-parrafo">
+        <p>
+          Tu belleza exterior salta a la vista: deja que nosotros nos
+          encarguemos de sacar tu belleza interior. Creamos looks exclusivos
+          inspirados en tu estilo personal, necesidades para eventos y gustos.
+          Nuestro equipo emplea su atención al detalle y productos de la mejor
+          calidad para ofrecer una amplia gama de servicios.
+        </p>
+      </div>
+
+      <div class="contendor-contenido">
+        <div class="logo-tratamiento">
+          <img src="assets/tratamiento.jfif" alt="logo" />
+        </div>
+        <div class="texto-tratamiento">
+          <h3>
+            También tenemos productos en venta con gran calidad, los cuales se
+            encuentran en la sección de productos.
+          </h3>
+        </div>
+      </div>
+
+      <div class="cont-titulo" >
+        <h3>Tratamiento de uñas</h3>
+      </div>
+
+      <div class="cont-opciones" >
+        <p>Manicure tradicional $14.000</p>
+        <p>Manicure semipermanente $35.000</p>
+        <p>Pedicure tradicional $15.000</p>
+        <p>Pedicure semipermanente $35.000</p>
+        <p>Uñas acrílicas $90.000</p>
+        <p>Retiro de esmalte semipermanente $7.000</p>
+        <p>Baño de acrílico $45.000</p>
+        <p>Press on $60.000</p>
+      </div>
+    </section>
+
+    <!-- Footer de la página -->
     <object class="footer" data="components/footer.html"></object>
+    <script src="js/services.js"></script>
   </body>
 </html>
