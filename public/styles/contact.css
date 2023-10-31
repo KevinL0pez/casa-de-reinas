@@ -1,0 +1,90 @@
+div.menu-fondo {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+div.menu-fondo > img {
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    object-fit: inherit;
+}
+
+.contenido-header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.contenido-header > h1 {
+    color: rgb(0, 0, 0);
+    font-size: 5rem;
+    font-weight: 400;
+}
+
+section > div.subtitulo {
+    display: flex;
+    width: 100%;
+    margin: 1rem 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h2 {
+    color: rgb(127,17,70);
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.contenedor-linea {
+    display: flex;
+    width: 100%;
+}
+
+.linea {
+    display: flex;
+    background-color: grey;
+    width: 100%;
+    height: 1px;
+    margin: 0 3rem;
+}
+
+.contenedor-contacto {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.contenido-imagen {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.contenido-informacion {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.direccion {
+    display: flex;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.horarios {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.horarios > p {
+    margin: 0.3rem 0;
+}

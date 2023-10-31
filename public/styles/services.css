@@ -1,9 +1,10 @@
 div.menu-fondo {
     display: flex;
     width: 100%;
+    position: relative;
 }
 
-.menu-fondo > img {
+div.menu-fondo > img {
     display: flex;
     width: 100%;
     height: 90vh;
