@@ -1,16 +1,44 @@
-const registroForm = document.getElementById("registroForm");
+const registroForm = document.getElementById("inicioSesionForm");
 
 registroForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  const nombreUsuario = document.getElementById("nombreUsuario").value;
   const correo = document.getElementById("correo").value;
-  const contrasena = document.getElementById("contrasena").value;
+  const contrasenia = document.getElementById("contrasena").value;
 
-  // Puedes hacer lo que desees con los datos ingresados, como enviarlos a un servidor o mostrarlos en una alerta:
-  const mensaje = `Nombre de Usuario: ${nombreUsuario}\nCorreo Electrónico: ${correo}\nContraseña: ${contrasena}`;
-  alert(mensaje);
-
-  // También puedes restablecer el formulario después de la presentación
-  registroForm.reset();
+  const datos = {
+    correo,
+    contrasenia
+  };
+  iniciarSesion(datos);
 });
+
+function iniciarSesion(datos) {
+  // URL del servidor donde se manejará la solicitud
+  const url = "http://localhost:3000/iniciarsesion";
+
+  // Configura la solicitud POST
+  const opciones = {
+    method: "POST", // Método HTTP
+    headers: {
+      "Content-Type": "application/json", // Tipo de contenido
+    },
+    body: JSON.stringify(datos), // Convierte los datos a formato JSON
+  };
+
+  // Realiza la solicitud POST
+  fetch(url, opciones)
+  .then((response) => {
+    // La solicitud fue exitosa (código de estado 200)
+    return response.json(); // Analizar el cuerpo de la respuesta como JSON
+  })
+  .then((data) => {
+    // "data" contiene el mensaje del servidor en formato JSON
+    console.log(data);
+    window.alert( data.message );
+    // Resto del código
+  })
+  .catch((error) => {
+    console.error('Error en la solicitud:', error);
+  });
+}

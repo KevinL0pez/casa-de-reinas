@@ -148,3 +148,56 @@ footer > p {
   color: aliceblue;
   font-size: 18px;
 }
+
+.contenedor-formulario {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-formulario {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Aquí puedes ajustar la sombra según tus preferencias */
+  padding: 20px;
+  margin: 3rem;
+}
+
+/* Estilo para los campos de entrada de texto */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  width: 90%;
+  margin-bottom: 10px;
+}
+
+/* Estilo para los botones */
+button[type="submit"] {
+  background-color: #4CAF50; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Cambiar el estilo del botón al pasar el cursor por encima */
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Estilo para etiquetas */
+label {
+  font-size: 16px;
+}
+
+/* Contenedor del formulario */
+div {
+  width: 300px;
+  margin: 0 auto;
+}
