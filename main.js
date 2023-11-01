@@ -33,7 +33,12 @@ app.get('/services', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    // Ruta de la página de servicios
+    // Ruta de la página de inicio de sesión
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+app.get('/register', (req, res) => {
+    // Ruta de la página de registro de usuario
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 

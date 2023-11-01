@@ -1,11 +1,13 @@
 export default function buildDataAccess(
-    { dbSaveProducts, dbGetProducts, dbGetAllProducts }
+    { dbSaveProducts, dbGetProducts, dbGetAllProducts, dbCreateUser, dbGetUser }
 ) {
     
     return Object.freeze({
         saveProducts,
         getProducts,
-        getAllProducts
+        getAllProducts,
+        createUser,
+        getUser
     });
 
     async function saveProducts(bodyParamsDB) {
@@ -23,6 +25,18 @@ export default function buildDataAccess(
     async function getAllProducts() {
         const sql = 'SELECT * FROM productos';
         let result = await dbGetAllProducts(sql);
+        return result;
+    }
+
+    async function createUser(bodyParamsDB) {
+        const sql = 'INSERT INTO usuarios (nombres, apellidos, documento, correo, contrasenia) VALUES (?, ?, ?, ?, ?)';
+        let result = await dbCreateUser(sql, bodyParamsDB);
+        return result;
+    }
+
+    async function getUser(bodyParamsDB) {
+        const sql = 'SELECT contrasenia FROM usuarios WHERE correo = ?';
+        let result = await dbGetUser(sql, bodyParamsDB);
         return result;
     }
 

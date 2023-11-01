@@ -2,6 +2,7 @@ import mysql from 'mysql';
 import buildDataAccess from './dataAccess';
 import appsettings from '../data/appsettings.json';
 const fs = require('fs');
+const bcrypt = require("bcrypt");
 
 const host = appsettings.db_config.host;
 const user = appsettings.db_config.user;
@@ -106,5 +107,115 @@ export async function dbGetAllProducts(objectConsult) {
   });
 }
 
-const dataAccess = buildDataAccess({ dbSaveProducts, dbGetProducts, dbGetAllProducts });
+export async function dbCreateUser(objectConsult, queryParams) {
+  const connection = mysql.createConnection(dbConfig);
+  const { nombres, apellidos, documento, correo, contrasenia } = queryParams;
+
+  // Encriptar la contraseña antes de almacenarla
+  const hashedPassword = await bcrypt.hash(contrasenia, 10)
+  
+  return new Promise((resolve, reject) => {
+    connection.connect((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      console.log('Conexión exitosa a la base de datos MySQL');
+      
+      // Se realiza la consulta
+      connection.query(objectConsult, [nombres, apellidos, documento, correo, hashedPassword], (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          // Cerrar conexión
+          connection.end((err) => {
+            if (err) {
+              reject(err);
+            } else {
+              console.log('Conexión cerrada exitosamente.');
+              resolve(result);
+            }
+          });
+        }
+      });
+    });
+  });
+}
+
+export async function dbGetUser(objectConsult, queryParams) {
+  const connection = mysql.createConnection(dbConfig);
+  const { correo, contrasenia } = queryParams;
+
+  return new Promise((resolve, reject) => {
+    connection.connect((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      console.log('Conexión exitosa a la base de datos MySQL');
+      
+      // Se realiza la consulta
+      connection.query(objectConsult, [correo], (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+
+          if (result.length > 0) {
+            // Compara la contraseña ingresada con la contraseña encriptada de la base de datos
+            const storedPassword = result[0].contrasenia;
+      
+            bcrypt.compare(contrasenia, storedPassword, (compareError, isMatch) => {
+              if (compareError) {
+                connection.end((err) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    console.log('Conexión cerrada exitosamente.');
+                    resolve({ message: 'Error en el servidor.', status: 500 })
+                  }
+                });
+              }
+      
+              if (isMatch) {
+                // Usuario autenticado
+                connection.end((err) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    console.log('Conexión cerrada exitosamente.');
+                    resolve({ message: 'Inicio de sesión exitoso.', status: 200 });
+                  }
+                });
+              } else {
+                // Credenciales incorrectas
+                connection.end((err) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    console.log('Conexión cerrada exitosamente.');
+                    reject({message: 'Credenciales incorrectas.', status: 401 });
+                  }
+                });
+              }
+            });
+          } else {
+            // El usuario no fue encontrado en la base de datos
+            connection.end((err) => {
+              if (err) {
+                reject(err);
+              } else {
+                console.log('Conexión cerrada exitosamente.');
+                reject({message: 'Credenciales incorrectas.', status: 401 });
+              }
+            });
+          }
+        }
+      });
+    });
+  });
+}
+
+const dataAccess = buildDataAccess(
+  { dbSaveProducts, dbGetProducts, dbGetAllProducts, dbCreateUser, dbGetUser }
+);
 export default dataAccess;
