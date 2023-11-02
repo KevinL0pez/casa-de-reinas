@@ -1,20 +1,16 @@
 const TITULO_CATEGORIA = {
-    "ESMALTE_LATIN_GRANDE": "Esmalte Latin Grande",
-    "LAMPARA_UV": "Lampara uv 180w",
-    "DRI_INALAMBRICO": "Dri Inálambrico",
-    "STICKERS": "Stickers",
-    "ACEITE_DE_CUTICULA": "Aceite De Cutícula",
-    "CORTA_CUTICULA": "Corta Cutícula",
+    "ESMALTE_SEMIPERMANENTE": "Esmalte Semipermanente",
+    "LAMPARA_SEMIPERMANENTE": "Lampara Semipermanente",
+    "DRILES": "Driles",
+    "OTROS_PRODUCTOS": "Otros Productos",
     "PRODUCTOS": "Productos"
 }
 
 const TIPO_CATEGORIA = {
-    1: "ESMALTE_LATIN_GRANDE",
-    2: "LAMPARA_UV",
-    3: "DRI_INALAMBRICO",
-    4: "STICKERS",
-    5: "ACEITE_DE_CUTICULA",
-    6: "CORTA_CUTICULA"
+    1: "ESMALTE_SEMIPERMANENTE",
+    2: "LAMPARA_SEMIPERMANENTE",
+    3: "DRILES",
+    4: "OTROS_PRODUCTOS",
 }
 
 document.addEventListener("DOMContentLoaded", function() {
