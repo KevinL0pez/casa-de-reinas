@@ -33,7 +33,7 @@ buttons.forEach((button, index) => {
                     sessionStorage.removeItem("categoria");
                     window.location.href = response.url;
                 } else {
-                    console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+                    console.error(`Error en la solicitud: ${response.status} - ${response.message}`);
                 }
             } catch (error) {
                 console.error("Error en la solicitud:", error);

@@ -1,3 +1,20 @@
+document.addEventListener("DOMContentLoaded", async function() {
+  const login = sessionStorage.getItem('login');
+  if (login == 'true') {
+    try {
+        // Realiza una solicitud Fetch al servidor en el puerto 5500
+        const response = await fetch(`http://localhost:5500/home`);
+        if (response.ok) {
+            window.location.href = response.url;
+        } else {
+            console.error(`Error en la solicitud: ${response.status} - ${response.message}`);
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+    }
+  }
+});
+
 const registroForm = document.getElementById("registroForm");
 
 registroForm.addEventListener("submit", function (event) {
@@ -80,30 +97,10 @@ btnlogin.addEventListener("click", async () => {
       window.location.href = response.url;
     } else {
       console.error(
-        `Error en la solicitud: ${response.status} - ${response.statusText}`
+        `Error en la solicitud: ${response.status} - ${response.message}`
       );
     }
   } catch (error) {
     console.error("Error en la solicitud:", error);
   }
 });
-
-async function validarRegistro() {
-  if (sessionStorage.getItem("login") == true) {
-    try {
-      // Realiza una solicitud Fetch al servidor en el puerto 5500
-      const response = await fetch(`http://localhost:5500/home`);
-      if (response.ok) {
-        window.location.href = response.url;
-      } else {
-        console.error(
-          `Error en la solicitud: ${response.status} - ${response.message}`
-        );
-      }
-    } catch (error) {
-      console.error("Error en la solicitud:", error);
-    }
-  }
-}
-
-validarRegistro();

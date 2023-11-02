@@ -44,14 +44,31 @@ async function cargarProductos(idCategoria) {
             console.log(response);
             if (response.ok) {
                 // Si la respuesta es exitosa (estado 200 OK), obtén el contenido en formato JSON
-                const data = await response.json(); // Para JSON
-                
-                // También puedes obtener el contenido como texto
-                // const data = await response.text(); // Para texto
-                
+                const data = await response.json();
                 console.log(data);
+                const container = document.getElementById('productos-container');
+
+                data.forEach((producto) => {
+                    const imageData = producto.imagen.data; // Supongamos que esto es un array de datos binarios
+                    const imageType = producto.imagen.type; // Ajusta esto al tipo de imagen correcto según tus datos
+                  
+                    const imageBlob = new Blob([new Uint8Array(imageData)], { type: imageType });
+                    producto.imageUrl = URL.createObjectURL(imageBlob);
+
+                    const productoElement = document.createElement('div');
+                    productoElement.className = 'producto';
+                    productoElement.innerHTML = `
+                    <div class="contenedor-img" ><img src="${producto.imageUrl}" alt="Producto" /></div>
+                    <div class="contenido-producto" >
+                        <h2>${producto.nombre}</h2>
+                        <p>${producto.descripcion}</p>
+                        <p>$${producto.precio}</p>
+                    </div>
+                    `;
+                    container.appendChild(productoElement);
+                });
             } else {
-                console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+                console.error(`Error en la solicitud: ${response.status} - ${response.message}`);
             }
         } catch (error) {
             console.error("Error en la solicitud:", error);
@@ -60,37 +77,33 @@ async function cargarProductos(idCategoria) {
         try {
             // Realiza una solicitud Fetch al servidor en el puerto 3000
             const response = await fetch(`http://localhost:3000/productos`);
-            console.log(response);
             if (response.ok) {
                 // Si la respuesta es exitosa (estado 200 OK), obtén el contenido en formato JSON
                 const data = await response.json();
-        
-                // Obtén el contenedor donde deseas mostrar las imágenes
-                const imagenesContenedor = document.getElementById('imagenes-contenedor'); // Reemplaza 'imagenes-contenedor' con el ID real de tu contenedor
-        
-                // Recorre los productos y crea elementos de imagen para cada uno
-                data.forEach(producto => {
-                    const imageData = producto.imagen.data;
-                    const imageType = producto.imagen.type;
-        
-                    console.log("Está procesando la imagen: " + producto.nombre);
-        
-                    // Convierte los datos binarios en un Blob
+                console.log(data);
+                const container = document.getElementById('productos-container');
+
+                data.forEach((producto) => {
+                    const imageData = producto.imagen.data; // Supongamos que esto es un array de datos binarios
+                    const imageType = producto.imagen.type; // Ajusta esto al tipo de imagen correcto según tus datos
+                  
                     const imageBlob = new Blob([new Uint8Array(imageData)], { type: imageType });
-        
-                    // Crea una URL de objeto para el Blob
-                    const imageUrl = URL.createObjectURL(imageBlob);
-        
-                    // Crea un elemento de imagen
-                    const imageElement = document.createElement(`img`);
-                    imageElement.src = imageUrl;
-        
-                    // Agrega el elemento de imagen al contenedor
-                    // imagenesContenedor.appendChild(imageElement);
-                    console.log(imageElement);
+                    producto.imageUrl = URL.createObjectURL(imageBlob);
+
+                    const productoElement = document.createElement('div');
+                    productoElement.className = 'producto';
+                    productoElement.innerHTML = `
+                    <div class="contenedor-img" ><img src="${producto.imageUrl}" alt="Producto" /></div>
+                    <div class="contenido-producto" >
+                        <h2>${producto.nombre}</h2>
+                        <p>${producto.descripcion}</p>
+                        <p>$${producto.precio}</p>
+                    </div>
+                    `;
+                    container.appendChild(productoElement);
                 });
             } else {
-                console.error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+                console.error(`Error en la solicitud: ${response.status} - ${response.message}`);
             }
         } catch (error) {
             console.error("Error en la solicitud:", error);

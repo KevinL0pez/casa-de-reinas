@@ -1,27 +1,74 @@
 div.menu-fondo {
-    display: flex;
-    width: 100%;
-    position: relative;
+  display: flex;
+  width: 100%;
+  position: relative;
 }
 
 div.menu-fondo > img {
-    display: flex;
-    width: 100%;
-    height: 90vh;
-    object-fit: cover;
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  object-fit: cover;
 }
 
 .contenido-header {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
 }
 
 .contenido-header > h1 {
-    color: rgb(0, 0, 0);
-    font-size: 5rem;
+  color: rgb(0, 0, 0);
+  font-size: 5rem;
+  font-weight: 400;
+}
+
+.contenedor-productos {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  margin: 2rem 0 0 0;
+}
+
+.producto {
+  display: flex;
+  width: 30%;
+  margin: 0.5rem;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+}
+
+.contenedor-img {
+  width: 30vw;
+  height: 30vh;
+}
+
+.contenedor-img > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 50% 20% / 10% 40%;
+}
+
+.contenido-producto {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.contenido-producto > h2 {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.contenido-producto > p {
+    margin: 0.5rem 0;
+    color: rgb(127,17,70);
+    font-size: 1rem;
     font-weight: 400;
 }

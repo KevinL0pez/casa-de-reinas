@@ -1,3 +1,20 @@
+document.addEventListener("DOMContentLoaded", async function() {
+  const login = sessionStorage.getItem('login');
+  if (login == 'true') {
+    try {
+        // Realiza una solicitud Fetch al servidor en el puerto 5500
+        const response = await fetch(`http://localhost:5500/home`);
+        if (response.ok) {
+            window.location.href = response.url;
+        } else {
+            console.error(`Error en la solicitud: ${response.status} - ${response.message}`);
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+    }
+  }
+});
+
 const registroForm = document.getElementById("inicioSesionForm");
 
 registroForm.addEventListener("submit", function (event) {
@@ -40,15 +57,33 @@ function iniciarSesion(datos) {
         sessionStorage.setItem('login', true);
         const response = await fetch(`http://localhost:5500/admin`);
         if (response.ok) {
-          window.location.href = response.url;
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: data.message,
+            showConfirmButton: false,
+            timer: 1500
+          }).then((result) => {
+            window.location.href = response.url;
+          })
         } else {
-          console.error(
-            `Error en la solicitud: ${response.status} - ${response.message}`
-          );
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       } else {
         sessionStorage.setItem('login', false);
-        window.alert(data.message);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: data.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
       // Resto del código
     })
@@ -79,28 +114,10 @@ btnregister.addEventListener("click", async () => {
       window.location.href = response.url;
     } else {
       console.error(
-        `Error en la solicitud: ${response.status} - ${response.statusText}`
+        `Error en la solicitud: ${response.status} - ${response.message}`
       );
     }
   } catch (error) {
     console.error("Error en la solicitud:", error);
   }
 });
-
-async function validarLogin() {
-  if (sessionStorage.getItem('login') == true) {
-    try {
-        // Realiza una solicitud Fetch al servidor en el puerto 5500
-        const response = await fetch(`http://localhost:5500/home`);
-        if (response.ok) {
-            window.location.href = response.url;
-        } else {
-            console.error(`Error en la solicitud: ${response.status} - ${response.message}`);
-        }
-    } catch (error) {
-        console.error("Error en la solicitud:", error);
-    }
-  }
-}
-
-validarLogin();

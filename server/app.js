@@ -112,7 +112,7 @@ app.post('/iniciarsesion', async (req, res) => {
   try {
     const data = req.body;
     const response = await buildControllerGetUser(data);
-    res.status(response.status).json({ message: response.message, status: response.status } );
+    res.status(response.status).json({ message: response.message, status: response.status, data: response.data } );
   } catch (error) {
     console.error(error);
     res.status(error.status).json({ message: error.message, status: error.status });
