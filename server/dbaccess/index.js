@@ -112,28 +112,41 @@ export async function dbCreateUser(objectConsult, queryParams) {
   const { nombres, apellidos, documento, correo, contrasenia } = queryParams;
 
   // Encriptar la contraseña antes de almacenarla
-  const hashedPassword = await bcrypt.hash(contrasenia, 10)
-  
-  return new Promise((resolve, reject) => {
+  const hashedPassword = await bcrypt.hash(contrasenia, 10);
+
+  return new Promise(async (resolve, reject) => {
     connection.connect((err) => {
       if (err) {
-        reject(err);
+        reject({ message: 'Error en el servidor.', status: 500 });
         return;
       }
       console.log('Conexión exitosa a la base de datos MySQL');
-      
-      // Se realiza la consulta
-      connection.query(objectConsult, [nombres, apellidos, documento, correo, hashedPassword], (error, result) => {
+
+      // Verificar si el usuario ya existe por correo o documento
+      const checkUserQuery = "SELECT * FROM usuarios WHERE correo = ? OR documento = ?";
+      connection.query(checkUserQuery, [correo, documento], (error, results) => {
         if (error) {
-          reject(error);
+          reject({ message: 'Error en el servidor.', status: 500 });
+          return;
+        }
+
+        if (results && results.length > 0) {
+          // El usuario ya existe, no se puede registrar de nuevo
+          reject({ message: 'El usuario ya existe.', status: 400 });
         } else {
-          // Cerrar conexión
-          connection.end((err) => {
-            if (err) {
-              reject(err);
+          connection.query(objectConsult, [nombres, apellidos, documento, correo, hashedPassword], (error, result) => {
+            if (error) {
+              reject({ message: 'Error en el servidor.', status: 500 });
             } else {
-              console.log('Conexión cerrada exitosamente.');
-              resolve(result);
+              // Cerrar conexión
+              connection.end((err) => {
+                if (err) {
+                  reject({ message: 'Error en el servidor.', status: 500 });
+                } else {
+                  console.log('Conexión cerrada exitosamente.');
+                  resolve({ message: 'Usuario registrado exitosamente.', status: 200 });
+                }
+              });
             }
           });
         }
@@ -183,7 +196,14 @@ export async function dbGetUser(objectConsult, queryParams) {
                     reject(err);
                   } else {
                     console.log('Conexión cerrada exitosamente.');
-                    resolve({ message: 'Inicio de sesión exitoso.', status: 200 });
+                    resolve({ message: 'Inicio de sesión exitoso.', status: 200, data: 
+                      { 
+                        nombres: result[0].nombres,
+                        apellidos: result[0].apellidos,
+                        correo: result[0].correo,
+                        documento: result[0].documento
+                      } 
+                    });
                   }
                 });
               } else {

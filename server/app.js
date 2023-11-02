@@ -98,15 +98,12 @@ app.get("/productos", async (req, res) => {
 app.post("/registrarusuario", async (req, res) => {
   try {
     const data = req.body;
-    await buildControllerCreateUser(data);
-    res.status(201).send("Usuario guardado exitosamente.");
+    const response = await buildControllerCreateUser(data);
+    console.log(response);
+    res.status(response.status).json({ message: response.message, status: response.status } );
   } catch (error) {
-    console.error("Ocurrió un error en el servidor:", error);
-    res
-      .status(500)
-      .send(
-        "Error al momento de crear el usuario."
-      );
+    console.error(error.message);
+    res.status(error.status).json({ message: error.message, status: error.status });
   }
 });
 
@@ -117,7 +114,7 @@ app.post('/iniciarsesion', async (req, res) => {
     const response = await buildControllerGetUser(data);
     res.status(response.status).json({ message: response.message, status: response.status } );
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
     res.status(error.status).json({ message: error.message, status: error.status });
   }
 });

@@ -35,7 +35,7 @@ export default function buildDataAccess(
     }
 
     async function getUser(bodyParamsDB) {
-        const sql = 'SELECT contrasenia FROM usuarios WHERE correo = ?';
+        const sql = 'SELECT * FROM usuarios WHERE correo = ?';
         let result = await dbGetUser(sql, bodyParamsDB);
         return result;
     }

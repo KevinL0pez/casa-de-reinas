@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <script src="https://kit.fontawesome.com/16db27cf0b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles/login.css" />
   </head>
   <body>
@@ -36,25 +37,34 @@
             </div>
           </div>
           <button id="navpage" class="nav-button">CONTACTO</button>
-          <button id="navpage" class="nav-button">INICIO DE SESIÓN</button>
+          <!-- Botones INICIO DE SESIÓN, ADMINISTRAR y CERRAR SESIÓN -->
+          <button id="loginButton" class="nav-button">INICIO DE SESIÓN</button>
+          <button id="adminButton" class="nav-button">ADMINISTRAR</button>
+          <button id="logoutButton" class="nav-button">CERRAR SESIÓN</button>
         </div>
       </nav>
     </div>
 
     <!-- Header de la página -->
-    <div class="contenedor-formulario" >
-      <div class="card-formulario" >
-        <h1>Inicio de sesión</h1>
-        <form id="inicioSesionForm" >
-    
+    <div class="contenedor-formulario">
+      <div class="card-formulario">
+        <h1>Inicio de Sesión</h1>
+        <form id="inicioSesionForm">
           <label for="correo">Correo Electrónico:</label>
           <input type="email" id="correo" required /><br />
     
           <label for="contrasena">Contraseña:</label>
-          <input type="password" id="contrasena" required /><br />
-    
-          <button type="submit">Iniciar Sesión</button>
+          <div class="contenido-pass">
+            <input type="password" id="contrasena" required />
+            <button type="button" id="togglePassword"><i class="fa-regular fa-eye"></i></button><br />
+          </div>
+          <button type="submit">Iniciar sesión</button>
         </form>
+        
+        <div class="contenedor-registro" >
+          <p>¿No tienes una cuenta aún?</p>
+          <button id="btn-register" type="button" >Registrate</button>
+        </div>
       </div>
     </div>
 

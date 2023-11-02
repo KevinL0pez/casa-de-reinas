@@ -163,10 +163,21 @@ footer > p {
   margin: 3rem;
 }
 
+.card-formulario > h1 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
 /* Estilo para los campos de entrada de texto */
 form > input[type="text"],
 form > input[type="email"],
-form > input[type="password"] {
+form > input[type="password"],
+form > div > input[type="password"],
+form > div > input[type="text"] {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
@@ -177,7 +188,7 @@ form > input[type="password"] {
 
 /* Estilo para los botones */
 form > button[type="submit"] {
-  background-color: #4CAF50; /* Color de fondo */
+  background-color: rgb(127,17,70); /* Color de fondo */
   color: white; /* Color del texto */
   border: none;
   border-radius: 5px;
@@ -186,12 +197,56 @@ form > button[type="submit"] {
   cursor: pointer;
 }
 
+form > div > button[type="button"] {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
 /* Cambiar el estilo del botón al pasar el cursor por encima */
 form > button[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: rgb(172, 33, 100);
 }
 
 /* Estilo para etiquetas */
 form > label {
   font-size: 16px;
+}
+
+.contenido-pass {
+  display: flex;
+}
+
+.contenedor-registro {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.contenedor-registro > p {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 2rem;
+}
+
+.contenedor-registro > button[type="button"] {
+  background-color: rgb(127,17,70); /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* Cambiar el estilo del botón al pasar el cursor por encima */
+.contenedor-registro > button[type="button"]:hover {
+  background-color: rgb(172, 33, 100);
 }

@@ -1,7 +1,10 @@
 // Server.js
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 const path = require('path');
+
+app.use(bodyParser.json()); // Para datos JSON
 
 // Middleware para servir archivos estáticos desde un directorio (por ejemplo, 'public')
 app.use(express.static('public', { index: false })); // Excluye el manejo de index.html por defecto
@@ -39,7 +42,11 @@ app.get('/login', (req, res) => {
 
 app.get('/register', (req, res) => {
     // Ruta de la página de registro de usuario
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    res.sendFile(path.join(__dirname, 'public', 'register.html'));
+});
+
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // Redirección de rutas no encontradas a la página de inicio

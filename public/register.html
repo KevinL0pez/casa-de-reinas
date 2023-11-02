@@ -12,10 +12,80 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <script src="https://kit.fontawesome.com/16db27cf0b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles/register.css" >
-    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-    
+  <!-- Menú de navegación -> -->
+  <div class="menu">
+    <nav class="nav">
+      <div class="nav-logo">
+        <h1 class="logo-text">CASA DE REINAS</h1>
+      </div>
+      <div class="nav-navigation">
+        <button id="navpage" class="nav-button">INICIO</button>
+        <button id="navpage" class="nav-button">SERVICIOS</button>
+        <div class="dropdown">
+          <button id="navpage" class="nav-button">PRODUCTOS</button>
+          <div class="dropdown-content">
+            <button class="nav-button">Esmalte latin grande</button>
+            <button class="nav-button">Lampara uv 180w</button>
+            <button class="nav-button">Dri inalambrico</button>
+            <button class="nav-button">Stickers</button>
+            <button class="nav-button">Aceite de cuticula</button>
+            <button class="nav-button">Cortacuticula</button>
+          </div>
+        </div>
+        <button id="navpage" class="nav-button">CONTACTO</button>
+        <!-- Botones INICIO DE SESIÓN, ADMINISTRAR y CERRAR SESIÓN -->
+        <button id="loginButton" class="nav-button">INICIO DE SESIÓN</button>
+        <button id="adminButton" class="nav-button">ADMINISTRAR</button>
+        <button id="logoutButton" class="nav-button">CERRAR SESIÓN</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Header de la página -->
+  <div class="contenedor-formulario">
+    <div class="card-formulario">
+      <h1>Registro de Usuario</h1>
+      <form id="registroForm">
+
+        <label for="nombres">Nombres:</label>
+        <input type="text" id="nombres" required ><br />
+
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" required ><br />
+
+        <label for="documento">Número de documento:</label>
+        <input type="text" id="documento" required ><br />
+
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" required /><br />
+  
+        <label for="contrasena">Contraseña:</label>
+        <div class="contenido-pass">
+          <input type="password" id="contrasena" required />
+          <button type="button" id="togglePassword"><i class="fa-regular fa-eye"></i></button><br />
+        </div>
+        <button type="submit">Registrarme</button>
+      </form>
+      
+      <div class="contenedor-registro" >
+        <p>¿Ya tienes una cuenta?</p>
+        <button id="btn-login" type="button" >Iniciar sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer de la página -->
+  <footer>
+    <p>
+      Para resevar una cita, llama al 3204456713 o envía un correo a
+      @casadereinas_06
+    </p>
+  </footer>
+  <script src="js/register.js"></script>
+  <script src="js/navegation.js"></script>
 </body>
 </html>
