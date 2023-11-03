@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   formNuevoProducto.style.display = "none";
 });
 
+const container = document.getElementById("productos-container");
 async function cargarProductos() {
   try {
     // Realiza una solicitud Fetch al servidor en el puerto 3000
@@ -25,7 +26,7 @@ async function cargarProductos() {
       // Si la respuesta es exitosa (estado 200 OK), obtén el contenido en formato JSON
       const data = await response.json();
       console.log(data);
-      const container = document.getElementById("productos-container");
+      
 
       data.forEach((producto) => {
         const imageData = producto.imagen.data; // Supongamos que esto es un array de datos binarios
@@ -44,6 +45,8 @@ async function cargarProductos() {
                     <h2>${producto.nombre}</h2>
                     <p>${producto.descripcion}</p>
                     <p>$${producto.precio}</p>
+                    <button id="btn-editar-${producto.id}" class="editar" >Editar producto</button>
+                    <button id="btn-eliminar-${producto.id}" class="eliminar" >Eliminar producto</button>
                 </div>
                 `;
         container.appendChild(productoElement);
@@ -173,4 +176,59 @@ btnNuevo.addEventListener("click", function () {
   } else {
     formNuevoProducto.style.display = "none"; // Ocultar el formulario
   }
+});
+
+
+// Agrega un controlador de eventos a un contenedor principal que contiene los botones de eliminación
+container.addEventListener("click", async (event) => {
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })
+  
+  swalWithBootstrapButtons.fire({
+    title: '¿Estás seguro?',
+    text: "¡Deseas eliminar este producto!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: '¡Sí, quiero elimarlo!',
+    cancelButtonText: '¡No, lo quiero conservar!',
+    reverseButtons: true
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      if (event.target.classList.contains("eliminar")) {
+          // Obtiene el ID del producto desde el botón
+          const buttonId = event.target.id;
+          const productId = buttonId.split("-")[2]; // Suponemos que el ID está en el formato "btn-eliminar-{ID}"
+    
+          // Realiza una solicitud para eliminar el producto utilizando el ID capturado
+          try {
+              const response = await fetch(`http://localhost:3000/eliminarproducto/${productId}`, {
+                  method: "DELETE",
+              });
+    
+              if (response.ok) {
+                  // Producto eliminado exitosamente, puedes actualizar la interfaz o recargar la página si es necesario
+                  Swal.fire({
+                      position: "top-end",
+                      icon: "success",
+                      title: "Producto eliminado con éxito",
+                      showConfirmButton: false,
+                      timer: 1500,
+                  });
+                  setTimeout(() => {
+                      window.location.reload();
+                  }, 1500);
+              } else {
+                  console.error(`Error en la solicitud: ${response.status} - ${response.message}`);
+              }
+          } catch (error) {
+              console.error("Error en la solicitud:", error);
+          }
+      }
+    }
+  })
 });

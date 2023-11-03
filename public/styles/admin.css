@@ -324,3 +324,58 @@ form > button[type="submit"]:hover {
   font-size: 1rem;
   font-weight: 400;
 }
+
+
+.contenido-producto > button.editar {
+  background-color: rgb(7, 124, 179); /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0.5rem 2rem;
+}
+
+/* Cambiar el estilo del botón al pasar el cursor por encima */
+.contenido-producto > button.editar:hover {
+  background-color: rgb(37, 152, 206);
+}
+
+.contenido-producto > button.eliminar {
+  background-color: rgb(127, 17, 35); /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0.5rem 2rem;
+}
+
+/* Cambiar el estilo del botón al pasar el cursor por encima */
+.contenido-producto > button.eliminar:hover {
+  background-color: rgb(177, 43, 65);
+}
+
+.btn.btn-success {
+  background-color: rgb(17, 127, 94); /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0.5rem 2rem;
+}
+
+.btn.btn-danger {
+  background-color: rgb(127, 17, 35); /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0.5rem 2rem;
+}

@@ -22,7 +22,8 @@ import {
   buildControllerGetProducts,
   buildControllerProducts,
   buildControllerCreateUser,
-  buildControllerGetUser
+  buildControllerGetUser,
+  buildControllerDeleteProduct
 } from "./controllers";
 
 // Servicio POST para guardar productos
@@ -70,6 +71,17 @@ app.get("/obtenerproductos", async (req, res) => {
       .send(
         "Error al obtener los productos. Por favor, inténtalo de nuevo más tarde."
       );
+  }
+});
+
+app.delete("/eliminarproducto/:id", async (req, res) => {
+  const productId = req.params.id; // Captura el ID del producto desde la URL
+  try {
+    const response = await buildControllerDeleteProduct(productId);
+    res.status(response.status).json({ message: response.message, status: response.status } );
+  } catch (error) {
+    console.error("Ocurrió un error en el servidor:", error);
+    res.status(error.status).json({ message: error.message, status: error.status });
   }
 });
 

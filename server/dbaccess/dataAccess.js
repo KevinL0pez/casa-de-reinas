@@ -1,5 +1,5 @@
 export default function buildDataAccess(
-    { dbSaveProducts, dbGetProducts, dbGetAllProducts, dbCreateUser, dbGetUser }
+    { dbSaveProducts, dbGetProducts, dbGetAllProducts, dbCreateUser, dbGetUser, dbDeleteProduct }
 ) {
     
     return Object.freeze({
@@ -7,7 +7,8 @@ export default function buildDataAccess(
         getProducts,
         getAllProducts,
         createUser,
-        getUser
+        getUser,
+        deleteProduct
     });
 
     async function saveProducts(bodyParamsDB) {
@@ -19,6 +20,12 @@ export default function buildDataAccess(
     async function getProducts(categoriaId) {
         const sql = 'SELECT * FROM productos p WHERE p.categoria_id = ?';
         let result = await dbGetProducts(sql, categoriaId);
+        return result;
+    }
+
+    async function deleteProduct(productId) {
+        const sql = 'DELETE FROM productos WHERE id = ?';
+        let result = await dbDeleteProduct(sql, productId);
         return result;
     }
 

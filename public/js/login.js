@@ -88,7 +88,6 @@ function iniciarSesion(datos) {
       // Resto del código
     })
     .catch((error) => {
-      window.alert(error.message);
       console.error("Error en la solicitud:", error);
     });
 }

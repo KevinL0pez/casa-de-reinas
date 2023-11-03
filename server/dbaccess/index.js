@@ -112,6 +112,35 @@ export async function dbGetAllProducts(objectConsult) {
   });
 }
 
+export async function dbDeleteProduct(objectConsult, productId) {
+  return new Promise((resolve, reject) => {
+    const connection = mysql.createConnection(dbConfig); // Crea una nueva conexión
+
+    connection.connect((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      console.log('Conexión exitosa a la base de datos MySQL');
+
+      connection.query(objectConsult, [productId], (error, result) => {
+        if (error) {
+          reject({ message: 'Error en el servidor.', status: 500 });
+        } else {
+          connection.end((err) => {
+            if (err) {
+              reject({ message: 'Error en el servidor.', status: 500 });
+            } else {
+              console.log('Conexión cerrada exitosamente.');
+              resolve({ message: 'Producto eliminado con éxito.', status: 200 });
+            }
+          });
+        }
+      });
+    });
+  });
+}
+
 export async function dbCreateUser(objectConsult, queryParams) {
   const connection = mysql.createConnection(dbConfig);
   const { nombres, apellidos, documento, correo, contrasenia } = queryParams;
@@ -241,6 +270,6 @@ export async function dbGetUser(objectConsult, queryParams) {
 }
 
 const dataAccess = buildDataAccess(
-  { dbSaveProducts, dbGetProducts, dbGetAllProducts, dbCreateUser, dbGetUser }
+  { dbSaveProducts, dbGetProducts, dbGetAllProducts, dbCreateUser, dbGetUser, dbDeleteProduct }
 );
 export default dataAccess;
