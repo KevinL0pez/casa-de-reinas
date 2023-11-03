@@ -1,0 +1,326 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+* {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #87848491;
+  border-radius: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+:root {
+  /* Paleta de colores */
+  --bg-primary: #131417;
+  --bg-secondary: #1e1f26;
+  --color-primary: #2c303a;
+  --black: #000000;
+}
+
+.menu {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+}
+
+footer {
+  height: 90px;
+  background-color: rgb(207, 12, 116);
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+footer > p {
+  color: aliceblue;
+  font-size: 18px;
+}
+
+header {
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+  height: 25px;
+  background-color: rgb(44, 44, 44);
+  justify-content: space-between;
+  padding: 1.5rem;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+  font-weight: 200;
+}
+
+.nav-navigation {
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  transition: all 0.3s ease-in-out 0.05s;
+}
+
+.nav-button:hover {
+  transform: translateY(-0.5rem) scale(1.1);
+  background-color: #555; /* Cambia esto al color de fondo deseado */
+  transition-duration: 0.3s;
+}
+
+/* Estilo del menú desplegable */
+.dropdown-content {
+  display: none;
+  position: fixed;
+  padding: 1rem;
+  background-color: rgb(44, 44, 44);
+  max-width: 300px;
+}
+
+/* Añade estilos a los elementos de la lista desplegable si es necesario */
+.dropdown-content button {
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  border: none;
+  background-color: transparent;
+}
+
+/* Estilo para mostrar el menú desplegable al pasar el mouse sobre el botón "Productos" */
+.dropdown:hover .dropdown-content {
+  display: block;
+  height: 25%;
+  overflow-y: auto;
+}
+
+footer {
+  height: 90px;
+  background-color: rgb(207, 12, 116);
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+footer > p {
+  color: aliceblue;
+  font-size: 18px;
+}
+
+.contenedor-productos {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  margin: 2rem 0 0 0;
+}
+
+.producto {
+  display: flex;
+  width: 30%;
+  margin: 0.5rem;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+}
+
+.contenedor-img {
+  width: 30vw;
+  height: 30vh;
+}
+
+.contenedor-img > img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 20% / 10% 40%;
+}
+
+.contenido-producto {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.contenido-producto > h2 {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.contenido-producto > p {
+  margin: 0.5rem 0;
+  color: rgb(127, 17, 70);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.btn-aniadir {
+  display: flex;
+  margin: 1rem;
+}
+
+.btn-aniadir > button[type="button"] {
+  background-color: rgb(127, 17, 70); /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* Cambiar el estilo del botón al pasar el cursor por encima */
+.btn-aniadir > button[type="button"]:hover {
+  background-color: rgb(172, 33, 100);
+}
+
+.contenedor-formulario {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-formulario {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Aquí puedes ajustar la sombra según tus preferencias */
+  padding: 20px;
+  margin: 3rem;
+}
+
+.card-formulario > h1 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+/* Estilo para los campos de entrada de texto */
+form > input[type="text"],
+form > input[type="file"],
+form > input[type="number"],
+form > select,
+form > textarea {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  width: 90%;
+  margin-bottom: 10px;
+}
+
+form > button[type="submit"] {
+  background-color: rgb(127,17,70); /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Cambiar el estilo del botón al pasar el cursor por encima */
+form > button[type="submit"]:hover {
+  background-color: rgb(172, 33, 100);
+}
+
+.contenedor-imagen {
+  display: flex;
+  width: 100%;
+}
+
+.contenido-registro {
+  display: flex;
+  width: 100%;
+}
+
+.contenedor-productos-nuevo {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+.producto-nuevo {
+  display: flex;
+  width: 100%;
+  margin: 0.5rem;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+}
+
+.contenedor-img-nuevo {
+  width: 42vw;
+  height: 35vh;
+}
+
+.contenedor-img-nuevo > img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 20% / 10% 40%;
+}
+
+.contenido-producto-nuevo {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.contenido-producto-nuevo > h2 {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.contenido-producto-nuevo > p {
+  margin: 0.5rem 0;
+  color: rgb(127, 17, 70);
+  font-size: 1rem;
+  font-weight: 400;
+}

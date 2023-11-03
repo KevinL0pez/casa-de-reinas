@@ -1,5 +1,5 @@
 const TITULO_CATEGORIA = {
-    "ESMALTE_SEMIPERMANENTE": "Esmalte Semipermanente",
+    "ESMALTE_SEMIPERMANENTE": "Esmaltes",
     "LAMPARA_SEMIPERMANENTE": "Lampara Semipermanente",
     "DRILES": "Driles",
     "OTROS_PRODUCTOS": "Otros Productos",

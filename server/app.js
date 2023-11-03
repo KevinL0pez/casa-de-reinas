@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors"); // Cambia 'import' a 'require'
-
+const multer = require('multer');
 const app = express();
 const port = 3000;
 app.use(bodyParser.json()); // Para datos JSON
@@ -13,6 +13,10 @@ app.use(
   })
 );
 
+// Configura el middleware para manejar la carga de archivos
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 import {
   buildControllerSaveProduct,
   buildControllerGetProducts,
@@ -22,18 +26,17 @@ import {
 } from "./controllers";
 
 // Servicio POST para guardar productos
-app.post("/guardar", async (req, res) => {
+app.post("/guardarproducto", upload.single('imagen'), async (req, res) => {
   const datos = req.body;
+  const image = req.file.buffer;
+  datos.imagen = image;
   try {
-    await buildControllerSaveProduct(datos);
-    res.status(201).send("Producto guardado exitosamente.");
+    const response = await buildControllerSaveProduct(datos);
+    console.log(response);
+    res.status(response.status).json({ message: response.message, status: response.status } );
   } catch (error) {
-    console.error("Ocurrió un error en el servidor:", error);
-    res
-      .status(500)
-      .send(
-        "Error al guardar el producto. Por favor, inténtalo de nuevo más tarde."
-      );
+    console.error(error.message);
+    res.status(error.status).json({ message: error.message, status: error.status });
   }
 });
 

@@ -12,8 +12,9 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <script src="https://kit.fontawesome.com/16db27cf0b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="styles/admin.css" />
-    <link rel="stylesheet" href="styles/index.css" />
   </head>
   <body>
     <!-- Menú de navegación -> -->
@@ -28,7 +29,7 @@
           <div class="dropdown">
             <button id="navpage" class="nav-button">PRODUCTOS</button>
             <div class="dropdown-content">
-              <button class="nav-button">Esmalte Semipermanente</button>
+              <button class="nav-button">Esmaltes</button>
               <button class="nav-button">Lampara Semipermanente</button>
               <button class="nav-button">Driles</button>
               <button class="nav-button">Otros Productos</button>
@@ -44,7 +45,57 @@
     </div>
 
     <header>
-        <h1>Hola</h1>
+      <div class="nuevo-producto">
+        <div class="btn-aniadir">
+          <button id="btn-nuevo" type="button">Agregar un nuevo producto</button>
+        </div>
+        <div id="form-nuevo-producto" class="card-formulario">
+          <h1>Registrar un nuevo producto</h1>
+
+          <div class="contenido-registro" >
+            <div class="contenedor-formulario">
+              <form id="formularioProducto" enctype="multipart/form-data">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required />
+  
+                <label for="categoria">Categoría:</label>
+                <select id="categoria" name="categoria" required>
+                  <!-- Opciones para la categoría -->
+                  <option value="">Selecciona una categoría</option>
+                  <option value="1">Esmaltes</option>
+                  <option value="2">Lampara Semipermanente</option>
+                  <option value="3">Driles</option>
+                  <option value="4">Otro producto</option>
+                </select>
+  
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" required></textarea>
+  
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="nombre" required />
+  
+                <label for="imagen">Imagen:</label>
+                <input
+                  type="file"
+                  id="imagen"
+                  name="imagen"
+                  accept="image/*"
+                  required
+                />
+  
+                <button type="submit">Guardar Producto</button>
+              </form>
+            </div>
+  
+            <div class="contenedor-imagen">
+              <div id="nuevo-producto" class="contenedor-productos-nuevo"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="productos-container" class="contenedor-productos"></div>
     </header>
 
     <!-- Footer de la página -->
@@ -54,7 +105,7 @@
         @casadereinas_06
       </p>
     </footer>
-
+    <script src="js/admin.js"></script>
     <script src="js/navegation.js"></script>
   </body>
 </html>

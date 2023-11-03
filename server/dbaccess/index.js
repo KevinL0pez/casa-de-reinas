@@ -3,6 +3,7 @@ import buildDataAccess from './dataAccess';
 import appsettings from '../data/appsettings.json';
 const fs = require('fs');
 const bcrypt = require("bcrypt");
+const multer = require('multer');
 
 const host = appsettings.db_config.host;
 const user = appsettings.db_config.user;
@@ -17,30 +18,34 @@ const dbConfig = {
   database: database
 };
 
+// Configura el middleware para manejar la carga de archivos
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 export async function dbSaveProducts(objectConsult, queryParams) {
   const connection = mysql.createConnection(dbConfig);
-  const { nombre, rutaArchivo, categoria, descripcion, precio } = queryParams;
-  const contenidoBinario = fs.readFileSync(rutaArchivo);
+  const { nombre, imagen, categoria, descripcion, precio } = queryParams;
+  // const contenidoBinario = fs.readFileSync(imagen);
   return new Promise((resolve, reject) => {
     connection.connect((err) => {
       if (err) {
-        reject(err);
+        reject({ message: 'Error en el servidor, intenta de nuevo más tarde.', status: 500 });
         return;
       }
       console.log('Conexión exitosa a la base de datos MySQL');
       
       // Se realiza la consulta
-      connection.query(objectConsult, [nombre, contenidoBinario, categoria, descripcion, precio], (error, result) => {
+      connection.query(objectConsult, [nombre, imagen, categoria, descripcion, precio], (error, result) => {
         if (error) {
-          reject(error);
+          reject({ message: 'Error en el servidor, intenta de nuevo más tarde.', status: 500 });
         } else {
           // Cerrar conexión
           connection.end((err) => {
             if (err) {
-              reject(err);
+              reject({ message: 'Error en el servidor, intenta de nuevo más tarde.', status: 500 });
             } else {
               console.log('Conexión cerrada exitosamente.');
-              resolve(result);
+              resolve({ message: 'Producto guardado exitosamente.', status: 200 });
             }
           });
         }
