@@ -23,7 +23,9 @@ import {
   buildControllerProducts,
   buildControllerCreateUser,
   buildControllerGetUser,
-  buildControllerDeleteProduct
+  buildControllerDeleteProduct,
+  builControllerGetProductId,
+  buildControllerEditProduct
 } from "./controllers";
 
 // Servicio POST para guardar productos
@@ -81,6 +83,32 @@ app.delete("/eliminarproducto/:id", async (req, res) => {
     res.status(response.status).json({ message: response.message, status: response.status } );
   } catch (error) {
     console.error("Ocurrió un error en el servidor:", error);
+    res.status(error.status).json({ message: error.message, status: error.status });
+  }
+});
+
+app.get("/obtenerproducto/:id", async (req, res) => {
+  const productId = req.params.id; // Captura el ID del producto desde la URL
+  try {
+    const response = await builControllerGetProductId(productId);
+    res.status(response.status).json({ message: response.message, status: response.status, data: response.data } );
+  } catch (error) {
+    console.error("Ocurrió un error en el servidor:", error);
+    res.status(error.status).json({ message: error.message, status: error.status });
+  }
+});
+
+// Ruta para registrar un nuevo usuario
+app.put("/editarproducto/:id", async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const data = req.body;
+    data.productId = productId;
+    console.log("data", data);
+    const response = await buildControllerEditProduct(data);
+    res.status(response.status).json({ message: response.message, status: response.status } );
+  } catch (error) {
+    console.error(error.message);
     res.status(error.status).json({ message: error.message, status: error.status });
   }
 });

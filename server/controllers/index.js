@@ -6,6 +6,8 @@ import buildGetControllerProducts from './products/getControllerProducts';
 import buildPostControllerCreateUser from './users/postControllerCreateUser';
 import buildPostControllerGetUser from './users/postControllerGetUser';
 import buildDeleteControllerProduct from './products/deleteControllerProduct';
+import buildGetControllerGetProductId from './products/getControllerGetProductId';
+import buildPutControllerEditProduct from './products/putControllerEditProduct';
 
 const buildControllerSaveProduct = buildPostControllerSaveProduct({dataAccess});
 const buildControllerGetProducts = buildGetControllerGetProducts({dataAccess});
@@ -13,6 +15,8 @@ const buildControllerProducts = buildGetControllerProducts({dataAccess});
 const buildControllerCreateUser = buildPostControllerCreateUser({dataAccess});
 const buildControllerGetUser = buildPostControllerGetUser({dataAccess});
 const buildControllerDeleteProduct = buildDeleteControllerProduct({dataAccess});
+const builControllerGetProductId = buildGetControllerGetProductId({dataAccess});
+const buildControllerEditProduct = buildPutControllerEditProduct({dataAccess});
 
 const objectService = Object.freeze({
     buildControllerSaveProduct,
@@ -20,7 +24,9 @@ const objectService = Object.freeze({
     buildControllerProducts,
     buildControllerCreateUser,
     buildControllerGetUser,
-    buildControllerDeleteProduct
+    buildControllerDeleteProduct,
+    builControllerGetProductId,
+    buildControllerEditProduct
 });
 
 export default objectService;
@@ -30,5 +36,7 @@ export {
     buildControllerProducts,
     buildControllerCreateUser,
     buildControllerGetUser,
-    buildControllerDeleteProduct
+    buildControllerDeleteProduct,
+    builControllerGetProductId,
+    buildControllerEditProduct
 };

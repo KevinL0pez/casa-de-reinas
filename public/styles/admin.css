@@ -240,6 +240,22 @@ footer > p {
   margin: 1rem 0;
 }
 
+.card-editar-formulario {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Aquí puedes ajustar la sombra según tus preferencias */
+  padding: 20px;
+  margin: 3rem;
+  width: 50%;
+}
+
+.card-editar-formulario > h1 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
 /* Estilo para los campos de entrada de texto */
 form > input[type="text"],
 form > input[type="file"],

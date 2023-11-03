@@ -141,6 +141,75 @@ export async function dbDeleteProduct(objectConsult, productId) {
   });
 }
 
+export async function dbEditProduct(objectConsult, queryParams) {
+  const { nombre, categoria, descripcion, precio, productId } = queryParams;
+
+  return new Promise((resolve, reject) => {
+    const connection = mysql.createConnection(dbConfig); // Crea una nueva conexión
+
+    connection.connect((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      console.log('Conexión exitosa a la base de datos MySQL');
+
+      connection.query(objectConsult, [nombre, categoria, descripcion, precio, productId], (error, result) => {
+        if (error) {
+          reject({ message: 'Error en el servidor.', status: 500 });
+        } else {
+          connection.end((err) => {
+            if (err) {
+              reject({ message: 'Error en el servidor.', status: 500 });
+            } else {
+              console.log('Conexión cerrada exitosamente.');
+              resolve({ message: 'Producto actualizado.', status: 200 });
+            }
+          });
+        }
+      });
+    });
+  });
+}
+
+export async function dbGetProductId(objectConsult, productId) {
+  return new Promise((resolve, reject) => {
+    const connection = mysql.createConnection(dbConfig); // Crea una nueva conexión
+
+    connection.connect((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      console.log('Conexión exitosa a la base de datos MySQL');
+
+      connection.query(objectConsult, [productId], (error, result) => {
+        console.log(result);
+        if (error) {
+          reject({ message: 'Error en el servidor.', status: 500 });
+        } else {
+          connection.end((err) => {
+            if (err) {
+              reject({ message: 'Error en el servidor.', status: 500 });
+            } else {
+              console.log('Conexión cerrada exitosamente.');
+              resolve({ message: 'Producto encontrado.', status: 200, data: { 
+                id: result[0].id,
+                nombre: result[0].nombre,
+                imagen: result[0].imagen,
+                categoria: result[0].categoria_id,
+                descripcion: result[0].descripcion,
+                precio: result[0].precio
+              } 
+             });
+            }
+          });
+        }
+      });
+    });
+  });
+}
+
 export async function dbCreateUser(objectConsult, queryParams) {
   const connection = mysql.createConnection(dbConfig);
   const { nombres, apellidos, documento, correo, contrasenia } = queryParams;
@@ -270,6 +339,6 @@ export async function dbGetUser(objectConsult, queryParams) {
 }
 
 const dataAccess = buildDataAccess(
-  { dbSaveProducts, dbGetProducts, dbGetAllProducts, dbCreateUser, dbGetUser, dbDeleteProduct }
+  { dbSaveProducts, dbGetProducts, dbGetAllProducts, dbCreateUser, dbGetUser, dbDeleteProduct, dbGetProductId, dbEditProduct }
 );
 export default dataAccess;

@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   cargarProductos();
   formNuevoProducto.style.display = "none";
+  formEditarProducto.style.display = "none";
 });
 
 const container = document.getElementById("productos-container");
@@ -153,7 +154,7 @@ formulario.addEventListener("input", function () {
   const nuevoProducto = document.createElement("div");
   nuevoProducto.classList.add("producto-nuevo");
   nuevoProducto.innerHTML = `
-                      <div class="contenedor-img-nuevo"><img src="${urlImagen}" alt="Producto" /></div>
+                      <div class="contenedor-img-nuevo"><img id="nueva-img" src="${urlImagen}" alt="Producto" /></div>
                       <div class="contenido-producto-nuevo">
                           <h2>${nombre}</h2>
                           <p>${descripcion}</p>
@@ -239,5 +240,127 @@ container.addEventListener("click", async (event) => {
           }
         }
       });
+  } else if (event.target.classList.contains("editar")) {
+    // Obtener el ID del producto a editar a partir del botón
+    const productId = event.target.id.split("-")[2];
+
+    // Llamar a la función de edición pasando el ID del producto
+    editarProducto(productId);
+  }
+});
+
+let productEditId;
+async function editarProducto(productId) {
+  if (
+    formEditarProducto.style.display === "none" ||
+    formEditarProducto.style.display === ""
+  ) {
+    formEditarProducto.style.display = "block"; // Mostrar el formulario
+  }
+  formularioEditarProducto.dispatchEvent(new Event('input'));
+  try {
+    await fetch(`http://localhost:3000/obtenerproducto/${productId}`, {
+      method: "GET",
+    })
+      .then((response) => {
+        // La solicitud fue exitosa (código de estado 200)
+        return response.json(); // Analizar el cuerpo de la respuesta como JSON
+      })
+      .then(async (data) => {
+
+        const nombreInput = document.getElementById("editar-nombre");
+        const categoriaInput = document.getElementById("editar-categoria");
+        const descripcionInput = document.getElementById("editar-descripcion");
+        const precioInput = document.getElementById("editar-precio");
+
+        // Rellenar el formulario con los datos del producto seleccionado
+        nombreInput.value = data.data.nombre;
+        categoriaInput.value = data.data.categoria; // Ajusta esto según la estructura de tu producto
+        descripcionInput.value = data.data.descripcion;
+        precioInput.value = data.data.precio;
+        productEditId = productId;
+
+      })
+      .catch((error) => {
+        window.alert(error.message);
+        console.error("Error en la solicitud:", error);
+      });
+  } catch (error) {
+    console.error("Error en la solicitud:", error);
+  }
+}
+
+const formEditarProducto = document.getElementById("form-editar-producto");
+const formularioEditarProducto = document.getElementById("formularioEditarProducto");
+const contenedorEditarProductos = document.getElementById("editar-producto");
+
+formularioEditarProducto.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const nombre = document.getElementById("editar-nombre").value;
+  const categoria = document.getElementById("editar-categoria").value;
+  const descripcion = document.getElementById("editar-descripcion").value;
+  const precio = document.getElementById("editar-precio").value;
+
+  const editarproducto = {
+    nombre,
+    categoria,
+    descripcion,
+    precio
+  }
+
+  const opciones = {
+    method: "PUT", // Método HTTP
+    headers: {
+      "Content-Type": "application/json", // Tipo de contenido
+    },
+    body: JSON.stringify(editarproducto), // Convierte los datos a formato JSON
+  };
+
+  // Realiza la solicitud POST al servidor
+  try {
+    await fetch(`http://localhost:3000/editarproducto/${productEditId}`, opciones)
+      .then((response) => {
+        // La solicitud fue exitosa (código de estado 200)
+        return response.json(); // Analizar el cuerpo de la respuesta como JSON
+      })
+      .then(async (data) => {
+        // "data" contiene el mensaje del servidor en formato JSON
+        console.log(data);
+        if (data.status === 200) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: data.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        } else {
+          sessionStorage.setItem("login", false);
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: data.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        // Resto del código
+      })
+      .catch((error) => {
+        console.error("Error en la solicitud:", error);
+      });
+  } catch (error) {
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: data.message,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    console.error("Error en la solicitud:", error);
   }
 });
